@@ -1,48 +1,38 @@
 import React, { Component } from "react";
+import ReactDOM from 'react-dom';
 
-class App extends Component {
+const ToggleStatusEnum = {
+  On: 'ON',
+  Off: 'OFF',
+};
+
+class Toggle extends Component {
   state = {
-    count: 0
+    status: ToggleStatusEnum.On,
   };
 
-  // change code below this line
-
-  increment() {
-    console.log("this.state.count : ", this.state.count);
+  handleClick() {
+    let status;
+    if (this.state.status === ToggleStatusEnum.On) {
+      status = ToggleStatusEnum.Off;
+    } else {
+      status = ToggleStatusEnum.On;
+    }
     this.setState({
-      count: this.state.count + 1
+      status
     });
   }
 
-  decrement() {
-    this.setState({
-      count: this.state.count - 1
-    });
-  }
-
-  reset() {
-    this.setState({
-      count: 0
-    });
-  }
-
-  // change code above this line
   render() {
     return (
-      <div>
-        <button className="inc" onClick={this.increment.bind(this)}>
-          Increment!
-        </button>
-        <button className="dec" onClick={this.decrement.bind(this)}>
-          Decrement!
-        </button>
-        <button className="reset" onClick={this.reset.bind(this)}>
-          Reset
-        </button>
-        <h1>Current Count: {this.state.count}</h1>
-      </div>
+      <button onClick={this.handleClick.bind(this)}>{this.state.status}</button>
     );
   }
 }
 
-export default App;
+ReactDOM.render(
+  <Toggle />,
+  document.getElementById('root')
+);
+
+export default Toggle;
